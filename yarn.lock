@@ -3207,7 +3207,7 @@ chalk@^4.0.0, chalk@^4.1.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@^4.1.1:
+chalk@^4.1.1, chalk@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
@@ -5225,6 +5225,15 @@ find-process@^1.4.4:
     commander "^5.1.0"
     debug "^4.1.1"
 
+find-process@^1.4.5:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/find-process/-/find-process-1.4.5.tgz#6a0e4c87a32ca927c05cbed7b9078d62ffaac1a4"
+  integrity sha512-v11rJYYISUWn+s8qZzgGnBvlzRKf3bOtlGFM8H0kw56lGQtOmLuLCzuclA5kehA2j7S5sioOWdI4woT3jDavAw==
+  dependencies:
+    chalk "^4.0.0"
+    commander "^5.1.0"
+    debug "^4.1.1"
+
 find-up@^2.0.0, find-up@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/find-up/-/find-up-2.1.0.tgz#45d1b7e506c717ddd482775a2b77920a3c0c57a7"
@@ -6693,6 +6702,19 @@ jest-dev-server@^5.0.3:
     tree-kill "^1.2.2"
     wait-on "^5.3.0"
 
+jest-dev-server@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/jest-dev-server/-/jest-dev-server-6.0.0.tgz#b46ddeb3f74f953cc78b884fe6c5211a1e4aba6b"
+  integrity sha512-6X8+/gtFeZBfX7fX3BTAnZzPbdDYcWUdhsvcbJI5PsDXdJ06VNMPqwcPP7ZR5hUeXyvww6CX6ro+oIiARHo5Sg==
+  dependencies:
+    chalk "^4.1.2"
+    cwd "^0.10.0"
+    find-process "^1.4.5"
+    prompts "^2.4.1"
+    spawnd "^6.0.0"
+    tree-kill "^1.2.2"
+    wait-on "^6.0.0"
+
 jest-diff@^24.0.0, jest-diff@^24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-24.9.0.tgz#931b7d0d5778a1baf7452cb816e325e3724055da"
@@ -6778,7 +6800,18 @@ jest-environment-node@^27.0.1:
     jest-mock "^27.0.6"
     jest-util "^27.0.6"
 
-jest-environment-puppeteer@5.0.4, jest-environment-puppeteer@^5.0.4:
+jest-environment-puppeteer@6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/jest-environment-puppeteer/-/jest-environment-puppeteer-6.0.0.tgz#c0c7613ac5d9720da8b00bd49e7405e954490a7e"
+  integrity sha512-Mf97xcEI8JrZ2HP+OuT95rvyLvkHb7AaZDnUBVoC/GgK5bJ7krZPlCwzRD6UZeFgbe6kexpk0d/nbMiuizdB1Q==
+  dependencies:
+    chalk "^4.1.1"
+    cwd "^0.10.0"
+    jest-dev-server "^6.0.0"
+    jest-environment-node "^27.0.1"
+    merge-deep "^3.0.3"
+
+jest-environment-puppeteer@^5.0.4:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/jest-environment-puppeteer/-/jest-environment-puppeteer-5.0.4.tgz#ed64689bf200923828ca98761b4da36eb8ce31bc"
   integrity sha512-wd4EDOD4QRi11QZ1IV8WsL1wlnnMUtcqtU0BNm+REzRtg78K2XHn3jS6YxGeXIOnsgrJeHxsD7DlRZ/GkFteLg==
@@ -7120,7 +7153,7 @@ jest@26.0.1:
     import-local "^3.0.2"
     jest-cli "^26.0.1"
 
-joi@^17.3.0:
+joi@^17.3.0, joi@^17.4.0:
   version "17.4.2"
   resolved "https://registry.yarnpkg.com/joi/-/joi-17.4.2.tgz#02f4eb5cf88e515e614830239379dcbbe28ce7f7"
   integrity sha512-Lm56PP+n0+Z2A2rfRvsfWVDXGEWjXxatPopkQ8qQ5mxCEhwHG+Ettgg5o98FFaxilOxozoa14cFhrE/hOzh/Nw==
@@ -9943,6 +9976,13 @@ rxjs@^6.6.3:
   dependencies:
     tslib "^1.9.0"
 
+rxjs@^7.1.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.4.0.tgz#a12a44d7eebf016f5ff2441b87f28c9a51cebc68"
+  integrity sha512-7SQDi7xeTMCJpqViXh8gL/lebcwlp3d831F05+9B44A4B0WfsEwUQHR64gsH1kvJ+Ep/J9K2+n1hVl1CsGN23w==
+  dependencies:
+    tslib "~2.1.0"
+
 safe-buffer@5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
@@ -10377,6 +10417,15 @@ spawnd@^5.0.0:
     signal-exit "^3.0.3"
     tree-kill "^1.2.2"
     wait-port "^0.2.9"
+
+spawnd@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/spawnd/-/spawnd-6.0.0.tgz#8bcb3b8769901cfb434ea3ff4334ac3bde3b9cda"
+  integrity sha512-ItqOhwoMppJDL8IEF44bupB37f7dIpKrCqkd8TV8PWB7gHDBfMYgGgslTkkcdvKPxhE4BfvNqs2ZI/GVoGXyIQ==
+  dependencies:
+    exit "^0.1.2"
+    signal-exit "^3.0.3"
+    tree-kill "^1.2.2"
 
 spdx-correct@^3.0.0:
   version "3.1.0"
@@ -11026,6 +11075,11 @@ tslib@^1.10.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.11.1.tgz#eb15d128827fbee2841549e171f45ed338ac7e35"
   integrity sha512-aZW88SY8kQbU7gpV19lN24LtXh/yD4ZZg6qieAJDDg+YBsJcSmLGK9QpnUjAKVG/xefmvJGd1WUmfpT/g6AJGA==
+
+tslib@~2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.1.0.tgz#da60860f1c2ecaa5703ab7d39bc05b6bf988b97a"
+  integrity sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==
 
 tsutils@^3.17.1:
   version "3.17.1"
@@ -11686,6 +11740,17 @@ wait-on@^5.3.0:
     lodash "^4.17.21"
     minimist "^1.2.5"
     rxjs "^6.6.3"
+
+wait-on@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/wait-on/-/wait-on-6.0.0.tgz#7e9bf8e3d7fe2daecbb7a570ac8ca41e9311c7e7"
+  integrity sha512-tnUJr9p5r+bEYXPUdRseolmz5XqJTTj98JgOsfBn7Oz2dxfE2g3zw1jE+Mo8lopM3j3et/Mq1yW7kKX6qw7RVw==
+  dependencies:
+    axios "^0.21.1"
+    joi "^17.4.0"
+    lodash "^4.17.21"
+    minimist "^1.2.5"
+    rxjs "^7.1.0"
 
 wait-port@^0.2.9:
   version "0.2.9"
