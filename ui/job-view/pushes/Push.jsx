@@ -41,6 +41,8 @@ import PushJobs from './PushJobs';
 const watchCycleStates = ['none', 'push', 'job', 'none'];
 const platformArray = Object.values(thPlatformMap);
 
+const COPIED_JOB_TYPE_NAMES = 'copiedJobTypeNames';
+
 // Bug 1638424 - Transform WPT test paths to look like paths
 // from a local checkout
 export const transformTestPath = (path) => {
@@ -109,6 +111,8 @@ class Push extends React.PureComponent {
       filteredTryPush: false,
       pushHealthStatus: null,
     };
+
+    this.jobGroups = new Set();
   }
 
   async componentDidMount() {
@@ -250,13 +254,15 @@ class Push extends React.PureComponent {
     }
   };
 
-  toggleSelectedRunnableJob = (signature) => {
+  toggleSelectedRunnableJob = (signature, selected = undefined) => {
     const { selectedRunnableJobs } = this.state;
     const jobIndex = selectedRunnableJobs.indexOf(signature);
 
     if (jobIndex === -1) {
-      selectedRunnableJobs.push(signature);
-    } else {
+      if (selected !== false) {
+        selectedRunnableJobs.push(signature);
+      }
+    } else if (selected !== true) {
       selectedRunnableJobs.splice(jobIndex, 1);
     }
     this.setState({ selectedRunnableJobs: [...selectedRunnableJobs] });
@@ -498,6 +504,54 @@ class Push extends React.PureComponent {
     );
   };
 
+  copyJobs = () => {
+    const { notify } = this.props;
+
+    const jobTypeNames = new Set();
+    for (const job of this.state.jobList) {
+      if (job.job_type_name === 'Gecko Decision Task') {
+        continue;
+      }
+      if (job.job_group_name === 'action-callback') {
+        continue;
+      }
+      jobTypeNames.add(job.job_type_name);
+    }
+    localStorage.setItem(
+      COPIED_JOB_TYPE_NAMES,
+      JSON.stringify([...jobTypeNames]),
+    );
+
+    notify(
+      `${jobTypeNames.size} job(s) copied. Use [Select copied jobs] after [Add new jobs] to select those jobs and trigger.`,
+    );
+  };
+
+  registerJobGroups = (jobGroup) => {
+    this.jobGroups.add(jobGroup);
+  };
+
+  selectCopiedRunnableJobs = async () => {
+    const { notify } = this.props;
+
+    const jobTypeNamesStr = localStorage.getItem(COPIED_JOB_TYPE_NAMES);
+    if (!jobTypeNamesStr) {
+      alert('no jobs are copied');
+      return;
+    }
+
+    const jobTypeNames = new Set(JSON.parse(jobTypeNamesStr));
+
+    const promises = [];
+    for (const jobGroup of this.jobGroups) {
+      promises.push(jobGroup.selectRunnableJobs(jobTypeNames));
+    }
+
+    const jobs = (await Promise.all(promises)).flat();
+
+    notify(`${jobs.length} job(s) selected.`);
+  };
+
   showFuzzyJobs = async () => {
     const { push, currentRepo, notify, decisionTaskMap } = this.props;
     const createRegExp = (str, opts) =>
@@ -655,6 +709,8 @@ class Push extends React.PureComponent {
           runnableVisible={runnableVisible}
           showRunnableJobs={this.showRunnableJobs}
           hideRunnableJobs={this.hideRunnableJobs}
+          copyJobs={this.copyJobs}
+          selectCopiedRunnableJobs={this.selectCopiedRunnableJobs}
           showFuzzyJobs={this.showFuzzyJobs}
           cycleWatchState={this.cycleWatchState}
           expandAllPushGroups={this.expandAllPushGroups}
@@ -704,6 +760,7 @@ class Push extends React.PureComponent {
                 runnableVisible={runnableVisible}
                 duplicateJobsVisible={duplicateJobsVisible}
                 groupCountsExpanded={groupCountsExpanded}
+                registerJobGroups={this.registerJobGroups}
               />
             </span>
           </div>

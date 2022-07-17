@@ -67,9 +67,10 @@ export default class JobButtonComponent extends React.Component {
     filterPlatformCb(isSelected ? job.task_run : null);
   }
 
-  toggleRunnableSelected() {
+  toggleRunnableSelected(selected = undefined) {
     this.setState((prevState) => ({
-      isRunnableSelected: !prevState.isRunnableSelected,
+      isRunnableSelected:
+        selected === undefined ? !prevState.isRunnableSelected : selected,
     }));
   }
 

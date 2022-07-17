@@ -33,7 +33,7 @@ GroupSymbol.defaultProps = {
 export class JobGroupComponent extends React.Component {
   constructor(props) {
     super(props);
-    const { pushGroupState } = this.props;
+    const { pushGroupState, registerJobGroups } = this.props;
 
     // The group should be expanded initially if the global group state is expanded
     const groupState = getUrlParam('group_state');
@@ -46,6 +46,8 @@ export class JobGroupComponent extends React.Component {
     for (const job of this.props.group.jobs) {
       this.jobButtonRefs[job.id] = React.createRef();
     }
+
+    registerJobGroups(this);
   }
 
   static getDerivedStateFromProps(nextProps, state) {
@@ -62,6 +64,31 @@ export class JobGroupComponent extends React.Component {
 
   toggleExpanded = () => {
     this.setState((prevState) => ({ expanded: !prevState.expanded }));
+  };
+
+  selectRunnableJobs = async (jobTypeNames) => {
+    const jobs = this.props.group.jobs.filter((job) => {
+      return job.state === 'runnable' && jobTypeNames.has(job.job_type_name);
+    });
+
+    if (jobs.length === 0) {
+      return jobs;
+    }
+
+    if (!this.state.expanded) {
+      await new Promise((resolve) => {
+        this.setState({ expanded: true }, resolve);
+      });
+    }
+
+    const { toggleSelectedRunnableJob } = this.props;
+    for (const job of jobs) {
+      const ref = this.jobButtonRefs[job.id];
+      toggleSelectedRunnableJob(ref.current.props.job.signature, true);
+      ref.current.toggleRunnableSelected(true);
+    }
+
+    return jobs;
   };
 
   toggleAll() {
@@ -206,6 +233,8 @@ JobGroupComponent.propTypes = {
   pushGroupState: PropTypes.string.isRequired,
   duplicateJobsVisible: PropTypes.bool.isRequired,
   groupCountsExpanded: PropTypes.bool.isRequired,
+  toggleSelectedRunnableJob: PropTypes.func.isRequired,
+  registerJobGroups: PropTypes.func.isRequired,
 };
 
 export default JobGroupComponent;

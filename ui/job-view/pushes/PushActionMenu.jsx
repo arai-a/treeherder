@@ -82,6 +82,8 @@ class PushActionMenu extends React.PureComponent {
       runnableVisible,
       hideRunnableJobs,
       showRunnableJobs,
+      copyJobs,
+      selectCopiedRunnableJobs,
       showFuzzyJobs,
       pushId,
       currentRepo,
@@ -114,6 +116,23 @@ class PushActionMenu extends React.PureComponent {
                 onClick={showRunnableJobs}
               >
                 Add new jobs
+              </DropdownItem>
+            )}
+            {runnableVisible ? (
+              <DropdownItem
+                tag="a"
+                title="Select copied jobs"
+                onClick={selectCopiedRunnableJobs}
+              >
+                Select copied jobs
+              </DropdownItem>
+            ) : (
+              <DropdownItem
+                tag="a"
+                title="Copy jobs for next 'Select copied jobs' after 'Add new jobs'"
+                onClick={copyJobs}
+              >
+                Copy jobs
               </DropdownItem>
             )}
             <DropdownItem
@@ -207,6 +226,8 @@ PushActionMenu.propTypes = {
   pushId: PropTypes.number.isRequired,
   hideRunnableJobs: PropTypes.func.isRequired,
   showRunnableJobs: PropTypes.func.isRequired,
+  copyJobs: PropTypes.func.isRequired,
+  selectCopiedRunnableJobs: PropTypes.func.isRequired,
   showFuzzyJobs: PropTypes.func.isRequired,
   notify: PropTypes.func.isRequired,
 };

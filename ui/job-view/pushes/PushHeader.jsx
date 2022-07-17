@@ -208,6 +208,8 @@ class PushHeader extends React.Component {
       watchState,
       showRunnableJobs,
       hideRunnableJobs,
+      copyJobs,
+      selectCopiedRunnableJobs,
       showFuzzyJobs,
       cycleWatchState,
       notificationSupported,
@@ -336,6 +338,8 @@ class PushHeader extends React.Component {
               pushId={pushId}
               showRunnableJobs={showRunnableJobs}
               hideRunnableJobs={hideRunnableJobs}
+              copyJobs={copyJobs}
+              selectCopiedRunnableJobs={selectCopiedRunnableJobs}
               showFuzzyJobs={showFuzzyJobs}
             />
           </span>
@@ -357,6 +361,8 @@ PushHeader.propTypes = {
   runnableVisible: PropTypes.bool.isRequired,
   showRunnableJobs: PropTypes.func.isRequired,
   hideRunnableJobs: PropTypes.func.isRequired,
+  copyJobs: PropTypes.func.isRequired,
+  selectCopiedRunnableJobs: PropTypes.func.isRequired,
   showFuzzyJobs: PropTypes.func.isRequired,
   cycleWatchState: PropTypes.func.isRequired,
   setSelectedJob: PropTypes.func.isRequired,

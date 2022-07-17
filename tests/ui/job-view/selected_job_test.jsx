@@ -62,6 +62,7 @@ const testPushJobs = (filtermodel = null) => {
           }
           pushGroupState=""
           toggleSelectedRunnableJob={() => {}}
+          registerJobGroups={() => {}}
           runnableVisible={false}
           duplicateJobsVisible={false}
           groupCountsExpanded={false}

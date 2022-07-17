@@ -106,6 +106,7 @@ class PushJobs extends React.Component {
       runnableVisible,
       platforms,
       toggleSelectedRunnableJob,
+      registerJobGroups,
     } = this.props;
 
     return (
@@ -125,6 +126,7 @@ class PushJobs extends React.Component {
                   groupCountsExpanded={groupCountsExpanded}
                   runnableVisible={runnableVisible}
                   toggleSelectedRunnableJob={toggleSelectedRunnableJob}
+                  registerJobGroups={registerJobGroups}
                 />
               ))
             ) : (
@@ -150,6 +152,7 @@ PushJobs.propTypes = {
   togglePinJob: PropTypes.func.isRequired,
   setSelectedJob: PropTypes.func.isRequired,
   toggleSelectedRunnableJob: PropTypes.func.isRequired,
+  registerJobGroups: PropTypes.func.isRequired,
   repoName: PropTypes.string.isRequired,
   push: PropTypes.shape({
     id: PropTypes.number,

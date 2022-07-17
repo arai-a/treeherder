@@ -16,6 +16,7 @@ export default class JobsAndGroups extends React.Component {
       groupCountsExpanded,
       runnableVisible,
       toggleSelectedRunnableJob,
+      registerJobGroups,
     } = this.props;
 
     return (
@@ -35,6 +36,7 @@ export default class JobsAndGroups extends React.Component {
                   groupCountsExpanded={groupCountsExpanded}
                   runnableVisible={runnableVisible}
                   toggleSelectedRunnableJob={toggleSelectedRunnableJob}
+                  registerJobGroups={registerJobGroups}
                 />
               )
             );
@@ -65,4 +67,6 @@ JobsAndGroups.propTypes = {
   pushGroupState: PropTypes.string.isRequired,
   duplicateJobsVisible: PropTypes.bool.isRequired,
   groupCountsExpanded: PropTypes.bool.isRequired,
+  toggleSelectedRunnableJob: PropTypes.func.isRequired,
+  registerJobGroups: PropTypes.func.isRequired,
 };
