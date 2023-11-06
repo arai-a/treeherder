@@ -20,6 +20,7 @@ import FailureSummaryTab from '../../../shared/tabs/failureSummary/FailureSummar
 import PerformanceTab from './PerformanceTab';
 import AnnotationsTab from './AnnotationsTab';
 import SimilarJobsTab from './SimilarJobsTab';
+import LocalRunTab from './LocalRunTab';
 
 const showTabsFromProps = (props) => {
   const { perfJobDetail } = props;
@@ -106,6 +107,7 @@ class TabsPanel extends React.Component {
       'failure',
       'annotations',
       'similar',
+      'local',
       'perf',
       'test-groups',
     ].filter((name) => !(name === 'perf' && !showPerf));
@@ -161,6 +163,7 @@ class TabsPanel extends React.Component {
               <Tab>Failure Summary</Tab>
               <Tab>Annotations</Tab>
               <Tab>Similar Jobs</Tab>
+              <Tab>Local Run</Tab>
               {showPerf && <Tab>Performance</Tab>}
               {enableTestGroupsTab ? (
                 <Tab>Test Groups</Tab>
@@ -249,6 +252,11 @@ class TabsPanel extends React.Component {
             <SimilarJobsTab
               repoName={currentRepo.name}
               classificationMap={classificationMap}
+              selectedJobFull={selectedJobFull}
+            />
+          </TabPanel>
+          <TabPanel>
+            <LocalRunTab
               selectedJobFull={selectedJobFull}
             />
           </TabPanel>
