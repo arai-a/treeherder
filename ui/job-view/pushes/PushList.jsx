@@ -133,6 +133,7 @@ class PushList extends React.Component {
       getAllShownJobs,
       jobsLoaded,
       duplicateJobsVisible,
+      intermittentFailureJobsVisible,
       groupCountsExpanded,
       pushHealthVisibility,
     } = this.props;
@@ -165,6 +166,7 @@ class PushList extends React.Component {
                 filterModel={filterModel}
                 notificationSupported={notificationSupported}
                 duplicateJobsVisible={duplicateJobsVisible}
+                intermittentFailureJobsVisible={intermittentFailureJobsVisible}
                 groupCountsExpanded={groupCountsExpanded}
                 isOnlyRevision={push.revision === revision}
                 pushHealthVisibility={pushHealthVisibility}
@@ -219,6 +221,7 @@ PushList.propTypes = {
   loadingPushes: PropTypes.bool.isRequired,
   jobsLoaded: PropTypes.bool.isRequired,
   duplicateJobsVisible: PropTypes.bool.isRequired,
+  intermittentFailureJobsVisible: PropTypes.bool.isRequired,
   groupCountsExpanded: PropTypes.bool.isRequired,
   allUnclassifiedFailureCount: PropTypes.number.isRequired,
   clearSelectedJob: PropTypes.func.isRequired,

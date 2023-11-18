@@ -90,6 +90,8 @@ class App extends React.Component {
       hasSelectedJob,
       groupCountsExpanded: urlParams.get('group_state') === 'expanded',
       duplicateJobsVisible: urlParams.get('duplicate_jobs') === 'visible',
+      intermittentFailureJobsVisible:
+        urlParams.get('intermittent_failure_jobs') !== 'hidden',
       showShortCuts: false,
       pushHealthVisibility: 'try',
     };
@@ -272,6 +274,7 @@ class App extends React.Component {
       selectedTaskRun,
       group_state: groupState,
       duplicate_jobs: duplicateJobs,
+      intermittent_failure_jobs: intermittentFailureJobs,
       repo: newRepo,
     } = parseQueryParams(router.location.search);
 
@@ -280,6 +283,7 @@ class App extends React.Component {
       hasSelectedJob: selectedJob || selectedTaskRun,
       groupCountsExpanded: groupState === 'expanded',
       duplicateJobsVisible: duplicateJobs === 'visible',
+      intermittentFailureJobsVisible: intermittentFailureJobs !== 'hidden',
       currentRepo,
       repoName: currentRepo ? currentRepo.name : thDefaultRepo,
     };
@@ -334,6 +338,7 @@ class App extends React.Component {
       hasSelectedJob,
       revision,
       duplicateJobsVisible,
+      intermittentFailureJobsVisible,
       groupCountsExpanded,
       showShortCuts,
       pushHealthVisibility,
@@ -377,6 +382,7 @@ class App extends React.Component {
             setCurrentRepoTreeStatus={this.setCurrentRepoTreeStatus}
             getAllShownJobs={this.getAllShownJobs}
             duplicateJobsVisible={duplicateJobsVisible}
+            intermittentFailureJobsVisible={intermittentFailureJobsVisible}
             groupCountsExpanded={groupCountsExpanded}
             toggleFieldFilterVisible={this.toggleFieldFilterVisible}
             pushHealthVisibility={pushHealthVisibility}
@@ -411,6 +417,9 @@ class App extends React.Component {
                       currentRepo={currentRepo}
                       filterModel={filterModel}
                       duplicateJobsVisible={duplicateJobsVisible}
+                      intermittentFailureJobsVisible={
+                        intermittentFailureJobsVisible
+                      }
                       groupCountsExpanded={groupCountsExpanded}
                       pushHealthVisibility={pushHealthVisibility}
                       getAllShownJobs={this.getAllShownJobs}

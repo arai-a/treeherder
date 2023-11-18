@@ -44,6 +44,7 @@ export default class JobButtonComponent extends React.Component {
       resultStatus,
       failureClassificationId,
       intermittent,
+      intermittentFailureJobsVisible,
     } = this.props;
     const { isSelected, isRunnableSelected } = this.state;
 
@@ -52,6 +53,7 @@ export default class JobButtonComponent extends React.Component {
       resultStatus !== nextProps.resultStatus ||
       failureClassificationId !== nextProps.failureClassificationId ||
       intermittent !== nextProps.intermittent ||
+      intermittentFailureJobsVisible !== nextProps.isRunnableSelected ||
       isSelected !== nextState.isSelected ||
       isRunnableSelected !== nextState.isRunnableSelected
     );
@@ -89,7 +91,7 @@ export default class JobButtonComponent extends React.Component {
   }
 
   render() {
-    const { job, intermittent } = this.props;
+    const { job, intermittent, intermittentFailureJobsVisible } = this.props;
     const { isSelected, isRunnableSelected } = this.state;
     const {
       state,
@@ -101,6 +103,10 @@ export default class JobButtonComponent extends React.Component {
     } = job;
 
     if (!visible) return null;
+    if (!intermittentFailureJobsVisible && intermittent) {
+      return null;
+    }
+
     const runnable = state === 'runnable';
     const btnClass = getBtnClass(resultStatus, failureClassificationId);
     let classifiedIcon = null;
@@ -163,6 +169,7 @@ JobButtonComponent.propTypes = {
   resultStatus: PropTypes.string.isRequired,
   filterPlatformCb: PropTypes.func.isRequired,
   failureClassificationId: PropTypes.number, // runnable jobs won't have this
+  intermittentFailureJobsVisible: PropTypes.bool.isRequired,
   intermittent: PropTypes.bool,
 };
 

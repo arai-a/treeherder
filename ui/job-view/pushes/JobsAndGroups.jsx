@@ -13,6 +13,7 @@ export default class JobsAndGroups extends React.Component {
       filterModel,
       pushGroupState,
       duplicateJobsVisible,
+      intermittentFailureJobsVisible,
       groupCountsExpanded,
       runnableVisible,
       toggleSelectedRunnableJob,
@@ -58,6 +59,9 @@ export default class JobsAndGroups extends React.Component {
                   key={group.mapKey}
                   pushGroupState={pushGroupState}
                   duplicateJobsVisible={duplicateJobsVisible}
+                  intermittentFailureJobsVisible={
+                    intermittentFailureJobsVisible
+                  }
                   groupCountsExpanded={groupCountsExpanded}
                   runnableVisible={runnableVisible}
                   toggleSelectedRunnableJob={toggleSelectedRunnableJob}
@@ -90,5 +94,6 @@ JobsAndGroups.propTypes = {
   filterPlatformCb: PropTypes.func.isRequired,
   pushGroupState: PropTypes.string.isRequired,
   duplicateJobsVisible: PropTypes.bool.isRequired,
+  intermittentFailureJobsVisible: PropTypes.bool.isRequired,
   groupCountsExpanded: PropTypes.bool.isRequired,
 };

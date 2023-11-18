@@ -143,6 +143,7 @@ describe('PushList', () => {
                 })
               }
               duplicateJobsVisible={false}
+              intermittentFailureJobsVisible
               groupCountsExpanded={false}
               pushHealthVisibility="None"
               getAllShownJobs={() => {}}

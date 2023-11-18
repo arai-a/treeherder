@@ -26,6 +26,7 @@ class PrimaryNavBar extends React.Component {
       serverChanged,
       groupCountsExpanded,
       duplicateJobsVisible,
+      intermittentFailureJobsVisible,
     } = this.props;
 
     return (
@@ -34,7 +35,9 @@ class PrimaryNavBar extends React.Component {
       !isEqual(prevProps.repos, repos) ||
       prevProps.serverChanged !== serverChanged ||
       prevProps.groupCountsExpanded !== groupCountsExpanded ||
-      prevProps.duplicateJobsVisible !== duplicateJobsVisible
+      prevProps.duplicateJobsVisible !== duplicateJobsVisible ||
+      prevProps.intermittentFailureJobsVisible !==
+        intermittentFailureJobsVisible
     );
   }
 
@@ -48,6 +51,7 @@ class PrimaryNavBar extends React.Component {
       filterModel,
       setCurrentRepoTreeStatus,
       duplicateJobsVisible,
+      intermittentFailureJobsVisible,
       groupCountsExpanded,
       toggleFieldFilterVisible,
       getAllShownJobs,
@@ -89,6 +93,7 @@ class PrimaryNavBar extends React.Component {
               repos={repos}
               setCurrentRepoTreeStatus={setCurrentRepoTreeStatus}
               duplicateJobsVisible={duplicateJobsVisible}
+              intermittentFailureJobsVisible={intermittentFailureJobsVisible}
               groupCountsExpanded={groupCountsExpanded}
               toggleFieldFilterVisible={toggleFieldFilterVisible}
               {...this.props}
@@ -110,6 +115,7 @@ PrimaryNavBar.propTypes = {
   serverChanged: PropTypes.bool.isRequired,
   user: PropTypes.shape({}).isRequired,
   duplicateJobsVisible: PropTypes.bool.isRequired,
+  intermittentFailureJobsVisible: PropTypes.bool.isRequired,
   groupCountsExpanded: PropTypes.bool.isRequired,
   notify: PropTypes.func.isRequired,
   getAllShownJobs: PropTypes.func.isRequired,

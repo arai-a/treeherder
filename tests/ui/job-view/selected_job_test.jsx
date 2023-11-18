@@ -64,6 +64,7 @@ const testPushJobs = (filtermodel = null) => {
           toggleSelectedRunnableJob={() => {}}
           runnableVisible={false}
           duplicateJobsVisible={false}
+          intermittentFailureJobsVisible
           groupCountsExpanded={false}
         />
       </ConnectedRouter>

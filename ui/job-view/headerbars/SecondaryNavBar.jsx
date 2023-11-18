@@ -8,6 +8,7 @@ import {
   faExclamationCircle,
   faFilter,
   faTimesCircle,
+  faMitten,
 } from '@fortawesome/free-solid-svg-icons';
 import { push as pushRoute } from 'connected-react-router';
 
@@ -138,6 +139,21 @@ class SecondaryNavBar extends React.PureComponent {
     });
   };
 
+  toggleShowIntermittentFailureJobs = () => {
+    const { intermittentFailureJobsVisible, pushRoute } = this.props;
+    const intermittentFailureJobs = intermittentFailureJobsVisible
+      ? 'hidden'
+      : null;
+
+    const queryParams = setUrlParams([
+      ['intermittent_failure_jobs', intermittentFailureJobs],
+    ]);
+
+    pushRoute({
+      search: queryParams,
+    });
+  };
+
   toggleGroupState = () => {
     const { groupCountsExpanded, pushRoute } = this.props;
     const groupState = groupCountsExpanded ? null : 'expanded';
@@ -207,6 +223,7 @@ class SecondaryNavBar extends React.PureComponent {
       filteredUnclassifiedFailureCount,
       groupCountsExpanded,
       duplicateJobsVisible,
+      intermittentFailureJobsVisible,
       toggleFieldFilterVisible,
     } = this.props;
     const { watchedRepoNames, searchQueryStr, repoName } = this.state;
@@ -348,6 +365,23 @@ class SecondaryNavBar extends React.PureComponent {
               </span>
             </span>
 
+            {/* Toggle intermittent failure Jobs */}
+            <Button
+              className="btn btn-sm border border-0"
+              tabIndex="0"
+              outline={!intermittentFailureJobsVisible}
+              role="checkbox"
+              aria-checked={intermittentFailureJobsVisible}
+              title={
+                intermittentFailureJobsVisible
+                  ? 'Hide intermittent failure jobs'
+                  : 'Show intermittent failure jobs'
+              }
+              onClick={() => this.toggleShowIntermittentFailureJobs()}
+            >
+              <FontAwesomeIcon icon={faMitten} />
+            </Button>
+
             <span>
               <Button
                 size="sm"
@@ -406,6 +440,7 @@ SecondaryNavBar.propTypes = {
   recalculateUnclassifiedCounts: PropTypes.func.isRequired,
   filteredUnclassifiedFailureCount: PropTypes.number.isRequired,
   duplicateJobsVisible: PropTypes.bool.isRequired,
+  intermittentFailureJobsVisible: PropTypes.bool.isRequired,
   groupCountsExpanded: PropTypes.bool.isRequired,
   toggleFieldFilterVisible: PropTypes.func.isRequired,
   pushRoute: PropTypes.func.isRequired,

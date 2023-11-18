@@ -50,6 +50,7 @@ describe('SecondaryNavBar', () => {
             repos={repos}
             setCurrentRepoTreeStatus={() => {}}
             duplicateJobsVisible={false}
+            intermittentFailureJobsVisible
             groupCountsExpanded={false}
             toggleFieldFilterVisible={() => {}}
             {...props}

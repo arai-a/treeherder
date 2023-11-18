@@ -123,6 +123,7 @@ describe('Push', () => {
           filterModel={filterModel}
           notificationSupported={false}
           duplicateJobsVisible={false}
+          intermittentFailureJobsVisible
           groupCountsExpanded={false}
           isOnlyRevision={push.revision === revision}
           pushHealthVisibility="None"

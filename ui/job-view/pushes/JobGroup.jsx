@@ -229,6 +229,7 @@ export class JobGroupComponent extends React.Component {
       },
       confirmGroup,
       runnableVisible,
+      intermittentFailureJobsVisible,
     } = this.props;
     const { expanded } = this.state;
     const { buttons, counts } = this.groupButtonsAndCounts(groupJobs, expanded);
@@ -273,6 +274,9 @@ export class JobGroupComponent extends React.Component {
                   failureClassificationId={job.failure_classification_id}
                   repoName={repoName}
                   filterPlatformCb={filterPlatformCb}
+                  intermittentFailureJobsVisible={
+                    intermittentFailureJobsVisible
+                  }
                   intermittent={isIntermittent(job)}
                   key={job.id}
                   ref={this.jobButtonRefs[job.id]}
@@ -305,6 +309,7 @@ JobGroupComponent.propTypes = {
   filterPlatformCb: PropTypes.func.isRequired,
   pushGroupState: PropTypes.string.isRequired,
   duplicateJobsVisible: PropTypes.bool.isRequired,
+  intermittentFailureJobsVisible: PropTypes.bool.isRequired,
   groupCountsExpanded: PropTypes.bool.isRequired,
 };
 

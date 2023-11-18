@@ -7,6 +7,7 @@ import { JobGroupComponent } from '../../../ui/job-view/pushes/JobGroup';
 import FilterModel from '../../../ui/models/filter';
 import mappedGroupFixture from '../mock/mappedGroup';
 import mappedGroupDupsFixture from '../mock/mappedGroupDups';
+import mappedGroupIntermittentFixture from '../mock/mappedGroupIntermittent';
 import { addAggregateFields } from '../../../ui/helpers/job';
 
 const history = createBrowserHistory();
@@ -14,6 +15,7 @@ const history = createBrowserHistory();
 describe('JobGroup component', () => {
   let countGroup;
   let dupGroup;
+  let intermittentGroup;
   const repoName = 'autoland';
   const filterModel = new FilterModel({
     pushRoute: history.push,
@@ -26,17 +28,22 @@ describe('JobGroup component', () => {
   beforeAll(() => {
     mappedGroupFixture.jobs.forEach((job) => addAggregateFields(job));
     mappedGroupDupsFixture.jobs.forEach((job) => addAggregateFields(job));
+    mappedGroupIntermittentFixture.jobs.forEach((job) =>
+      addAggregateFields(job),
+    );
   });
 
   beforeEach(() => {
     countGroup = cloneDeep(mappedGroupFixture);
     dupGroup = cloneDeep(mappedGroupDupsFixture);
+    intermittentGroup = cloneDeep(mappedGroupIntermittentFixture);
   });
 
   const jobGroup = (
     group,
     groupCountsExpanded = false,
     duplicateJobsVisible = false,
+    intermittentFailureJobsVisible = true,
   ) => (
     <JobGroupComponent
       repoName={repoName}
@@ -46,6 +53,7 @@ describe('JobGroup component', () => {
       pushGroupState={pushGroupState}
       platform={<span>windows</span>}
       duplicateJobsVisible={duplicateJobsVisible}
+      intermittentFailureJobsVisible={intermittentFailureJobsVisible}
       groupCountsExpanded={groupCountsExpanded}
       push={history.push}
     />
@@ -133,5 +141,62 @@ describe('JobGroup component', () => {
 
     const jobs = await waitFor(() => getAllByTestId('job-btn'));
     expect(jobs).toHaveLength(2);
+  });
+
+  test('should show 4 jobs when set to show intermittent failure jobs', async () => {
+    const duplicateJobsVisible = false;
+    const groupCountsExpanded = true;
+    const intermittentFailureJobsVisible = true;
+
+    const { getAllByTestId } = render(
+      jobGroup(
+        intermittentGroup,
+        groupCountsExpanded,
+        duplicateJobsVisible,
+        intermittentFailureJobsVisible,
+      ),
+    );
+
+    const jobs = await waitFor(() => getAllByTestId('job-btn'));
+    expect(jobs).toHaveLength(4);
+
+    expect(jobs[0].firstChild.textContent).toBe('asan');
+    expect(jobs[0].querySelectorAll('.fa-mitten')).toHaveLength(0);
+
+    expect(jobs[1].firstChild.textContent).toBe('msan');
+    expect(jobs[1].querySelectorAll('.fa-mitten')).toHaveLength(0);
+
+    expect(jobs[2].firstChild.textContent).toBe('msan');
+    expect(jobs[2].querySelectorAll('.fa-mitten')).toHaveLength(1);
+
+    expect(jobs[3].firstChild.textContent).toBe('p');
+    expect(jobs[3].querySelectorAll('.fa-mitten')).toHaveLength(0);
+  });
+
+  test('should show 3 jobs when set to hide intermittent failure jobs', async () => {
+    const duplicateJobsVisible = false;
+    const groupCountsExpanded = true;
+    const intermittentFailureJobsVisible = false;
+
+    const { getAllByTestId } = render(
+      jobGroup(
+        intermittentGroup,
+        groupCountsExpanded,
+        duplicateJobsVisible,
+        intermittentFailureJobsVisible,
+      ),
+    );
+
+    const jobs = await waitFor(() => getAllByTestId('job-btn'));
+    expect(jobs).toHaveLength(3);
+
+    expect(jobs[0].firstChild.textContent).toBe('asan');
+    expect(jobs[0].querySelectorAll('.fa-mitten')).toHaveLength(0);
+
+    expect(jobs[1].firstChild.textContent).toBe('msan');
+    expect(jobs[1].querySelectorAll('.fa-mitten')).toHaveLength(0);
+
+    expect(jobs[2].firstChild.textContent).toBe('p');
+    expect(jobs[2].querySelectorAll('.fa-mitten')).toHaveLength(0);
   });
 });

@@ -31,6 +31,7 @@ class PushJobs extends React.Component {
       'pushGroupState',
       'runnableVisible',
       'duplicateJobsVisible',
+      'intermittentFailureJobsVisible',
       'groupCountsExpanded',
     ]);
   }
@@ -102,6 +103,7 @@ class PushJobs extends React.Component {
       filterModel,
       pushGroupState,
       duplicateJobsVisible,
+      intermittentFailureJobsVisible,
       groupCountsExpanded,
       runnableVisible,
       platforms,
@@ -122,6 +124,9 @@ class PushJobs extends React.Component {
                   pushGroupState={pushGroupState}
                   key={`${platform.name}${platform.option}`}
                   duplicateJobsVisible={duplicateJobsVisible}
+                  intermittentFailureJobsVisible={
+                    intermittentFailureJobsVisible
+                  }
                   groupCountsExpanded={groupCountsExpanded}
                   runnableVisible={runnableVisible}
                   toggleSelectedRunnableJob={toggleSelectedRunnableJob}
@@ -158,6 +163,7 @@ PushJobs.propTypes = {
   pushGroupState: PropTypes.string.isRequired,
   runnableVisible: PropTypes.bool.isRequired,
   duplicateJobsVisible: PropTypes.bool.isRequired,
+  intermittentFailureJobsVisible: PropTypes.bool.isRequired,
   groupCountsExpanded: PropTypes.bool.isRequired,
   platforms: PropTypes.arrayOf(PropTypes.object).isRequired,
   filterModel: PropTypes.shape({}).isRequired,

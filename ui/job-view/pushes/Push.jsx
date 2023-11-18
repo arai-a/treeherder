@@ -605,6 +605,7 @@ class Push extends React.PureComponent {
       push,
       currentRepo,
       duplicateJobsVisible,
+      intermittentFailureJobsVisible,
       filterModel,
       notificationSupported,
       getAllShownJobs,
@@ -727,6 +728,7 @@ class Push extends React.PureComponent {
                 toggleSelectedRunnableJob={this.toggleSelectedRunnableJob}
                 runnableVisible={runnableVisible}
                 duplicateJobsVisible={duplicateJobsVisible}
+                intermittentFailureJobsVisible={intermittentFailureJobsVisible}
                 groupCountsExpanded={groupCountsExpanded}
               />
             </span>
@@ -760,6 +762,7 @@ Push.propTypes = {
   recalculateUnclassifiedCounts: PropTypes.func.isRequired,
   allUnclassifiedFailureCount: PropTypes.number.isRequired,
   duplicateJobsVisible: PropTypes.bool.isRequired,
+  intermittentFailureJobsVisible: PropTypes.bool.isRequired,
   groupCountsExpanded: PropTypes.bool.isRequired,
   notify: PropTypes.func.isRequired,
   isOnlyRevision: PropTypes.bool.isRequired,

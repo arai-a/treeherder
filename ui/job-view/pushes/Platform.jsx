@@ -42,6 +42,7 @@ export default class Platform extends React.PureComponent {
         'filterModel',
         'pushGroupState',
         'duplicateJobsVisible',
+        'intermittentFailureJobsVisible',
         'groupCountsExpanded',
         'runnableVisible',
       ])
@@ -85,6 +86,7 @@ export default class Platform extends React.PureComponent {
       filterModel,
       pushGroupState,
       duplicateJobsVisible,
+      intermittentFailureJobsVisible,
       groupCountsExpanded,
       runnableVisible,
       toggleSelectedRunnableJob,
@@ -108,6 +110,7 @@ export default class Platform extends React.PureComponent {
           filterModel={filterModel}
           pushGroupState={pushGroupState}
           duplicateJobsVisible={duplicateJobsVisible}
+          intermittentFailureJobsVisible={intermittentFailureJobsVisible}
           groupCountsExpanded={groupCountsExpanded}
           runnableVisible={runnableVisible}
           toggleSelectedRunnableJob={toggleSelectedRunnableJob}
@@ -125,6 +128,7 @@ Platform.propTypes = {
   filterModel: PropTypes.shape({}).isRequired,
   pushGroupState: PropTypes.string.isRequired,
   duplicateJobsVisible: PropTypes.bool.isRequired,
+  intermittentFailureJobsVisible: PropTypes.bool.isRequired,
   groupCountsExpanded: PropTypes.bool.isRequired,
   runnableVisible: PropTypes.bool.isRequired,
 };
